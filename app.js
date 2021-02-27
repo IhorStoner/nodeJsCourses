@@ -1,2 +1,9 @@
-const { processEnv } = require("./lib/process.env");
-const { processArgv } = require("./lib/process.argv");
+const { processEnv } = require("./lib/env");
+const { processArgv } = require("./lib/argv");
+require('./lib/patch')
+
+processEnv()
+processArgv()
+
+console.log('Hello world')
+console.short('consoleShort Hello world')
