@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cross-env COLOR=red node app.js",
     "start:cpuInfo": "cross-env node app.js --cpu",
+    "start:lan": "cross-env node app.js --lan",
     "start:pcInfo": "cross-env node app.js --full-info",
     "start:debug": "node --inspect-brk app.js --primary=blue"
   },
