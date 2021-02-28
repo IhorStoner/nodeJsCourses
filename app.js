@@ -6,4 +6,4 @@ processEnv()
 processArgv()
 
 console.log('Hello world')
-console.short('consoleShort Hello world')
+console.short('consoleShort','Hello','world')
