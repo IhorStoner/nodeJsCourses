@@ -4,10 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env COLOR=red node app.js",
-    "start:cpuInfo": "cross-env node app.js --cpu",
-    "start:lan": "cross-env node app.js --lan",
-    "start:pcInfo": "cross-env node app.js --full-info",
+    "start": "cross-env node app.js",
+    "start:hw1": "cross-env COLOR=blue node ./hw1/app.js --full-info ",
+    "start:hw2": "cross-env COLOR=blue node ./hw2/app.js",
     "start:debug": "node --inspect-brk app.js --primary=blue"
   },
   "author": "IhorS",
