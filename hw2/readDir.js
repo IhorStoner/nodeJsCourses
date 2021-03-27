@@ -16,9 +16,9 @@ const readDir = async (dirPath, dirDeep, findTemplate, basePath, emitter) => {
           continue;
         }
 
-        await new Promise((resolve) => {
-          setTimeout(resolve, 100);
-        });
+        // await new Promise((resolve) => {
+        //   setTimeout(resolve, 100);
+        // });
 
         findFiles.push(
           ...(await readDir(newDir, dirDeep, findTemplate, basePath, emitter))

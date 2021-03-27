@@ -1,5 +1,9 @@
 const Finder = require('./Finder');
 const path = require('path')
+const { createReadStream } = require("fs");
+const yargs = require("yargs/yargs");
+const { hideBin } = require('yargs/helpers');
+const FileType = require('file-type');
 const { processEnv } = require("../hw1/lib/env");
 const {
   EVENT_INIT,
@@ -9,28 +13,54 @@ const {
   EVENT_ERROR,
 } = require("./constants");
 
-processEnv()
-const dirToFind = path.join(__dirname, '../node_modules');
+// processEnv()
+
+const argv = yargs(hideBin(process.argv)).argv
+const { ext } = argv
+console.log(ext)
+
+const dirToFind = path.join(__dirname, '../hw2');
 const findDeep = 0;
-const findRegEx = new RegExp(".*?.js$");
+const findRegEx = new RegExp("app.js");
 
-
-const MyEE = new Finder(dirToFind,findDeep,findRegEx);
+const MyEE = new Finder(dirToFind, findDeep, findRegEx);
 
 
 MyEE.once(EVENT_INIT, () => {
   MyEE.parseDir();
 });
 
-MyEE.on(EVENT_FIND, (path) => {
-  console.log("find", path);
+MyEE.on(EVENT_FIND, (pathToFile) => {
+
+ 
+
+  (async () => { /// read first chunk
+    const file = path.join(dirToFind, pathToFile)
+    const stream = createReadStream(file, { highWaterMark: 4100, encoding: "utf-8", start: 0, end: 100 });
+    
+    
+
+    for await (let chunk of stream) {
+      console.log("chunk", chunk);
+      const fileType = await FileType.fromStream(stream);
+
+      if(!fileType) {
+        const fileType = path.extname(file)
+        console.log(fileType)
+      }
+      
+      stream.destroy();
+    }
+  })();
+
+  console.log("find", pathToFile);
 });
 
 MyEE.once(EVENT_COMPLETE, (found) => {
-  console.log("complete", JSON.stringify(found));
+  console.log("complete", found);
 });
 
-MyEE.on(EVENT_PROGRESS, ({dirs,files}) => {
+MyEE.on(EVENT_PROGRESS, ({ dirs, files }) => {
   console.log("progress", `dirs: ${dirs}, files: ${files}`);
 });
 

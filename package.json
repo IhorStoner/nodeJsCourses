@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start:hw5": "cross-env nodemon ./hw5/app.js",
+    "start:hw2": "cross-env COLOR=blue node ./hw2/app.js --ext json --ext js",
     "start": "cross-env node app.js",
     "start:hw1": "cross-env COLOR=blue node ./hw1/app.js --full-info ",
-    "start:hw2": "cross-env COLOR=blue node ./hw2/app.js",
     "start:debug": "node --inspect-brk app.js --primary=blue"
   },
   "author": "IhorS",
@@ -14,6 +15,9 @@
   "dependencies": {
     "chalk": "^4.0.2",
     "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "file-type": "^16.3.0",
+    "nodemon": "^2.0.7",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
